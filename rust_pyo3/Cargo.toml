@@ -1,6 +1,21 @@
 [package]
-name = "rust_files"
+name = "rust_pyo3"
 version = "0.1.0"
 edition = "2024"
 
+[lib]
+name = "rust_pyo3"
+crate-type = ["cdylib"] # "cdylib" is necessary to produce a shared library for Python to import from.
+
 [dependencies]
+linfa = "0.7.1"
+linfa-clustering = "0.7.1"
+linfa-nn = "0.7.1"
+ndarray = "0.15"
+numpy = "0.25"
+pyo3 = { version = "0.25.1", features = ["extension-module"] }
+rand = "0.8"
+rand_xoshiro = "0.7.0"
+
+[package.metadata.maturin]
+name = "rust_pyo3"

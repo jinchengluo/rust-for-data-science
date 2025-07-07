@@ -7,3 +7,32 @@ This guide is divided in four parts :
 2. [**Basics of Cargo**](./cargo.md)
 3. [**How to use PyO3**](./pyo3.md)
 4. [**Applications and tests**](./applications.md)
+
+## Usage
+
+### Clone project
+```bash
+git clone git@github.com:vincentjc-lo/rust_for_data_science.git
+```
+
+### Install Rust and Cargo
+```bash
+curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh
+```
+
+Check with `rustc --version` and `cargo --version`
+
+### Install uv
+```bash
+curl -LsSf https://astral.sh/uv/install.sh | sh
+```
+
+### Install dependencies
+```bash
+uv tool install maturin
+```
+
+### Compile
+```bash
+maturin develop
+```
