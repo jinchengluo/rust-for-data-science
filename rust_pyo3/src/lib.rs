@@ -2,7 +2,7 @@ use linfa::prelude::*;
 use linfa_clustering::KMeans;
 use linfa_nn::distance::L2Dist;
 use ndarray::prelude::*;
-use numpy::PyReadonlyArray2;
+use numpy::{PyReadonlyArray2};
 use rand::prelude::*;
 // use plotters::prelude::*;
 use pyo3::prelude::*;
@@ -41,15 +41,7 @@ fn linfa_kmeans_test(n_clusters_ : usize, data: PyReadonlyArray2<f64>) -> PyResu
     // let square_3: Array2<f64> = create_square([3.0, 8.0], 1.0, 150); // Cluster 3
     // let square_4: Array2<f64> = create_square([5.0, 5.0], 9.0, 300); // A bunch of noise across them all
 
-    // let data: Array2<f64> = ndarray::concatenate(
-    //     Axis(0),
-    //     &[
-    //         square_1.view(),
-    //         square_2.view(),
-    //         square_3.view(),
-    //         square_4.view(),
-    //     ],
-    // )
+    // let data: Array2<f64> = ndarray::concatenate(Axis(0), &[square_1.view(), square_2.view(), square_3.view(), square_4.view()])
     // .expect("An error occurred while stacking the dataset");
 
     let data = data.as_array();

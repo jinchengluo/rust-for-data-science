@@ -1,2 +1,3 @@
 rust_pyo3/target
+rust_test/target
 .venv
