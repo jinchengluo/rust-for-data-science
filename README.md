@@ -29,6 +29,7 @@ curl -LsSf https://astral.sh/uv/install.sh | sh
 
 ### Install dependencies
 ```bash
+uv pip install -r requirements.txt
 uv tool install maturin
 ```
 
@@ -36,3 +37,4 @@ uv tool install maturin
 ```bash
 maturin develop
 ```
+Then run your Python code.
