@@ -3,6 +3,7 @@ use pyo3::prelude::*;
 use pyo3::Python;
 
 mod kmeans;
+mod linfa_kmeans;
 
 #[pyfunction]
 fn dist(x1: PyReadonlyArray1<f64>, x2: PyReadonlyArray1<f64>) -> f64 {
