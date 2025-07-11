@@ -23,7 +23,9 @@ fn init_kmeans_pp(data: ArrayView2<f64>, n_clusters: i32) -> Array2<f64> {
     // Chooses first centroid randomly
     let mut centroids = Array2::<f64>::zeros((n_clusters_usize, n_features));
     let mut rng = rand::rng();
-    centroids.row_mut(0).assign(&data.row(rng.random_range(0..n_samples)));
+    centroids
+        .row_mut(0)
+        .assign(&data.row(rng.random_range(0..n_samples)));
 
     for k in 0..n_clusters_usize {
         // Computes distances to the nearest centroid
@@ -74,7 +76,6 @@ fn kmeans_alamano<'py>(
     init: Option<&str>,
     debug: Option<bool>,
 ) -> PyResult<Bound<'py, PyArray2<f64>>> {
-
     // Default parameters
     let max_iter = max_iter.unwrap_or(300);
     let tol = tol.unwrap_or(1e-6);
