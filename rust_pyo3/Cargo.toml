@@ -8,6 +8,7 @@ name = "rust_pyo3"
 crate-type = ["cdylib"] # "cdylib" is necessary to produce a shared library for Python to import from.
 
 [dependencies]
+itertools = "0.14.0"
 linfa = "0.7.1"
 linfa-clustering = "0.7.1"
 linfa-nn = "0.7.1"

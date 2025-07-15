@@ -20,7 +20,7 @@ fn dist(x1: PyReadonlyArray1<f64>, x2: PyReadonlyArray1<f64>) -> f64 {
 
 #[pymodule]
 fn rust_pyo3(_py: Python<'_>, m: &Bound<'_, PyModule>) -> PyResult<()> {
-    m.add_function(wrap_pyfunction!(dist,m)?)?;
+    m.add_function(wrap_pyfunction!(dist, m)?)?;
     kmeans::register(m)?;
     linfa_kmeans::register(m)?;
     stratif_split::register(m)?;
