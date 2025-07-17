@@ -9,12 +9,14 @@ This page is a summary of the basics of Rust programming language. If you want m
  - Rust requires less memory compared to many other languages
  - Rust is used to build web servers, creating games, operating systems, and much more!
 
-In each section, the title will be followed by a star (*) that redirects to the "Book".
+In each section, the title will be followed by a star (*) that makes a reference to the "Book" if some additional information can be necessary.
+
+## Summary
 
 1. [Prerequisites and installation](#1-prerequisites-and-installation-)
 2. [Variables and constants](#2-variables-and-constants)  
 3. [Operators](#3-operators)
-4. [If..else and loops](#4-ifelse-and-loops)
+4. [Control flow](#4-control-flow)
 5. [Functions](#5-functions)
 6. [Scope](#6-scope)
 
@@ -30,7 +32,7 @@ To update your current local Rust version, launch this command :
 $ rustup update
 ```
 
-## 2. Variables and constants
+## 2. Variables and constants [*](https://doc.rust-lang.org/book/ch03-02-data-types.html)
 
 Variables are containers for storing data values, like numbers and characters.
 ```rust
@@ -50,11 +52,16 @@ y = 1000; // value is now changed
 There are several data types in Rust whose the main ones are : 
 ```rust
 let integer: i32 = 5;          // integer
+let u_integer : usize = 5; // unsigned interger
 let float: f64 = 5.99;    // float
 let letter: char = 'D';    // character
 let boolean: bool = true;     // boolean
 let string: &str = "Hello";  // string
+let mut mut_string: String = "Hello!" // mutable String
 ```
+**Disclaimer** : use `String` as it is considered like a list (Vec<>) whose size is dynamic.
+
+Tuples are defined using `( )` : `let tuple : (type1, type2, type3, ...) = (x, y, z, ...)`
 
 You can define constants :
 ```rust
@@ -62,7 +69,7 @@ const CONST : type = value;
 ```
 **Disclaimer** : You must specify the type when creating a constant.
 
-## 3. Operators
+## 3. Operators [*](https://doc.rust-lang.org/book/appendix-02-operators.html)
 
 **Arithmetic Operators** : `+` (addition), `-` (substraction), `*` (multiplication), `/` (division), `%` (modulus)
 
@@ -70,8 +77,9 @@ const CONST : type = value;
 
 **Comparison operators** : `==`, `!=`, `>`, `<`, `>=`, `<=`
 
-## 4. If..else and loops
+## 4. Control flow [*](https://doc.rust-lang.org/book/ch03-05-control-flow.html)
 
+Conditions using if, elif and else :
 ```rust
 if condition1 {
     // code
@@ -82,6 +90,7 @@ if condition1 {
 }
 ```
 
+Match a variable to different value (similar to `switch` in other programming languages) :
 ```rust
 let var = val;
 match var {
@@ -93,6 +102,7 @@ match var {
 } // Similar to if statements but 
 ```
 
+For loop :
 ```rust
 for iterator in lower_bound..upper_bound {
     // code
@@ -100,13 +110,14 @@ for iterator in lower_bound..upper_bound {
 ```
 `iterator` goes from `lower_bound` to `upper_bound - 1`. If you wish to include upper_bound, use `..=`.
 
+While loop :
 ```rust
 while condition {
     // code
 }
 ```
 
-## 5. Functions
+## 5. Functions [*](https://doc.rust-lang.org/book/ch03-03-how-functions-work.html)
 
 ```rust
 fn function_name(arg1: type1, arg2: type2, ...) -> return_type {
@@ -122,7 +133,7 @@ let variable = value;
 println!("Variable value is here : {}", variable)
 ```
 
-## 6. Scope
+## 6. Scopes
 
 A scope refers to where a varaible is allowed to be used. A varible only lives inside the block where it as created. A block is anything inside curly braces  `{ }`.
 
@@ -135,12 +146,12 @@ fn func() {
 }
 
 func();
-println!("{}", message); // Error - the variable was local to the function block.
+println!("{}", message); // Error: the variable was local to the function block.
 ```
 
 ```rust
 let x : i32 = 5;
-let x : i32 = 10; // Error - name already used in this scope
+let x : i32 = 10; // Error: name already used in this scope
 ```
 
 ```rust
@@ -151,6 +162,130 @@ for i in 0..3 {
 }
 println!("{}", x); // prints 5
 ```
+
+## 7. Ownership [*](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)
+
+Rust uses "ownership" to manage memory in a safe way. Every value in Rust has an owner. The owner is usually a variable. There are 3 rules to ownership in Rust :
+
+- Each value in Rust has an owner.
+- There can only be one owner at a time.
+- When the owner goes out of scope, the value will be dropped.
+
+For example :
+```rust
+let x = String::from("Hello");
+let y = x; 
+println!("{}", x); // -> Error: a no longer owns the value and is now empty
+println!("{}", y); // Prints the value owned by y and previously owned by x
+```
+
+However the ownership rules only apply when manipulating data structures such as list or array (String is considered as a list). Thus, assigning an interger from an interger variable works and the value is only copied. The same occurs for floats, characters and booleans.
+```rust
+let x = 5;
+let y = x;
+println!("{}", x); // Works and prints 5
+println!("{}", y); // Works and prints 5, y copied the value inside x
+```
+
+For other types such as `String`, the method `.clone()` exists. It copies the data.
+
+## 8. References and borrowing [*](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html)
+
+Sometimes you want to use a value without taking ownership of it. Rust lets you do this using a reference, this is called a **borrowing**.
+
+You can create a reference using the symbol `&` in front of a variable.
+```rust
+let x = String::from("Hello");
+let y = &x;
+println!("{}", x); // Works, prints Hello
+println!("{}", y); // Works, prints Hello
+```
+
+However, for instance in the previous case, `y` only borrows the value of `x` and `x` still owns it. That means if you change the value of `y`, the same goes for `x` (while assuming that the `mut` keyword was added).
+
+They both point to the same memory emplacement and you can change a value through a reference.
+```rust
+let mut x = String::from("Hello");
+let mut y = &mut x;
+y.push_str(" datacrafter!");
+println!("{}", x); // Works, prints Hello datacrafter!
+println!("{}", y); // Works, prints Hello datacrafter!
+```
+**Note** : You can only have one mutable reference to a value at a time!
+
+In short : Borrowing helps you reuse values safely, without giving them away.
+- It lets you use values without taking ownership
+- It avoids cloning, which can be slow for large data
+- It makes your programs safer and faster
+
+## 9. Data structures
+
+### Structs [*](https://doc.rust-lang.org/book/ch05-01-defining-structs.html)
+```rust
+struct Name {
+    atr1 : type1,
+    atr2 : type2,
+    ...
+}
+```
+To access an attribute, you follow the variable with a dot (.) and the attribute name.
+
+Example : (we assume that a struct User was defined upper in the code with the correct attributes)
+```rust
+let mut user1 = User {
+    active: true,
+    username: String::from("someusername123"),
+    email: String::from("someone@example.com"),
+    sign_in_count: 1,
+};
+user1.email = String::from("anotheremail@example.com");
+```
+
+### Arrays
+```rust
+let array: [type; n] = [val1, val2, ..., val_n]
+```
+All values of the array must be of the same data type. We can access an element using index : `array[i]` for instance.
+
+To change the value of one element in the array, the array must be mutable.
+
+To access the length of the array, use `.len()` which is a class method of arrays
+
+To loop through an array, just like in Python, you do : 
+```rust
+for elt in array {
+    // code
+}
+```
+
+To print a whole array :
+```rust
+let array = [val1, val2, ...]
+println!("{:?}", array);
+```
+
+**Note** : The size of an array is fixed, no element can be deleted nor added. This is why we use Vectors sometimes which is a resizable array.
+
+### Vectors 
+```rust
+let vector : Vec<type> = vec![val1, val2, ...]
+```
+
+Accessing and changing an element is the same as for arrays. Vectors also have a `.len()` method. The printing macro is also the same.
+
+To add a new element in the vector, use `.push(value)`. To remove use `.pop()`. Their behavior is the same as `.append` `.pop()` in Python.
+
+To add a new element at a certain index, use `.insert(index, value)`. To remove at a certain index, use `.remove(index)`. These two methods will change the whole vector and the complexity is linear in the number of element. Thus, it is not recommanded.
+
+To loop through a vector, we must go through a reference of it (if not, the values are moved out and you can not longer use the vector) :
+```rust
+for elt in &vector {
+    // code
+}
+```
+
+
+
 
 ## Source
 - [The "Book" (Rust official page)](https://doc.rust-lang.org/book/)
