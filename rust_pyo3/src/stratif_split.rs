@@ -103,13 +103,13 @@ fn stratified_train_test_split<'py>(
 }
 
 #[pyfunction]
-#[pyo3(signature = (data, y, k, sizes=None))]
+#[pyo3(signature = (data, y, k))]
 fn stratified_kfold_split<'py>( 
     py: Python<'py>,
     data: PyReadonlyArray2<'py, f64>,
     y: PyReadonlyArray1<'py, i32>,
     k: i32,
-    sizes: Option<Vec<f64>>
+    // sizes: Option<Vec<f64>>
 ) ->  PyResult<(Vec<Bound<'py, PyArray2<f64>>>, Vec<Bound<'py, PyArray1<i32>>>)> {
     // Convert numpy arrays to Rust arrays
     let data = data.as_array();
