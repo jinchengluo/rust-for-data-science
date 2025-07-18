@@ -1,6 +1,6 @@
 # Rust
 
-This page is a summary of the basics of Rust programming language. If you want more information et and more complete guide for Rust, you can take a look in [The "Book"](https://doc.rust-lang.org/book/).
+This page is a summary of the basics of Rust programming language. If you want more information et and more complete guide for Rust, you can take a look in [The Book](https://doc.rust-lang.org/book/).
 
 ### Why Rust?
  - It is one of the fastest-growing programming languages in the world
@@ -9,16 +9,24 @@ This page is a summary of the basics of Rust programming language. If you want m
  - Rust requires less memory compared to many other languages
  - Rust is used to build web servers, creating games, operating systems, and much more!
 
-In each section, the title will be followed by a star (*) that makes a reference to the "Book" if some additional information can be necessary.
+In each section, the title will be followed by a star (*) that makes a reference to The Book if some additional information can be necessary.
 
 ## Summary
 
-1. [Prerequisites and installation](#1-prerequisites-and-installation-)
+1. [Prerequisites and installation](#1-prerequisites-and-installation)
 2. [Variables and constants](#2-variables-and-constants)  
 3. [Operators](#3-operators)
 4. [Control flow](#4-control-flow)
 5. [Functions](#5-functions)
-6. [Scope](#6-scope)
+6. [Scope](#6-scopes)
+7. [Ownership](#7-ownership)
+8. [Reference and borrowing](#8-references-and-borrowing)
+9. [Data structures](#9-data-structures)
+    1. [Arrays](#91-arrays)
+    2. [Vectors](#92-vectors)
+    3. [HashMap](#93-hashmap)
+    4. [Structs](#94-structs)
+10. [Summary](#10-summary)
 
 ## 1. Prerequisites and installation [*](https://doc.rust-lang.org/book/ch01-01-installation.html)
 ```bash
@@ -133,7 +141,7 @@ let variable = value;
 println!("Variable value is here : {}", variable)
 ```
 
-## 6. Scopes
+## 6. Scopes [*](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html#variable-scope)
 
 A scope refers to where a varaible is allowed to be used. A varible only lives inside the block where it as created. A block is anything inside curly braces  `{ }`.
 
@@ -220,28 +228,7 @@ In short : Borrowing helps you reuse values safely, without giving them away.
 
 ## 9. Data structures
 
-### Structs [*](https://doc.rust-lang.org/book/ch05-01-defining-structs.html)
-```rust
-struct Name {
-    atr1 : type1,
-    atr2 : type2,
-    ...
-}
-```
-To access an attribute, you follow the variable with a dot (.) and the attribute name.
-
-Example : (we assume that a struct User was defined upper in the code with the correct attributes)
-```rust
-let mut user1 = User {
-    active: true,
-    username: String::from("someusername123"),
-    email: String::from("someone@example.com"),
-    sign_in_count: 1,
-};
-user1.email = String::from("anotheremail@example.com");
-```
-
-### Arrays
+### 9.1. Arrays [*](https://doc.rust-lang.org/book/ch03-02-data-types.html#the-array-type)
 ```rust
 let array: [type; n] = [val1, val2, ..., val_n]
 ```
@@ -266,7 +253,7 @@ println!("{:?}", array);
 
 **Note** : The size of an array is fixed, no element can be deleted nor added. This is why we use Vectors sometimes which is a resizable array.
 
-### Vectors 
+### 9.2. Vectors [*](https://doc.rust-lang.org/book/ch08-01-vectors.html)
 ```rust
 let vector : Vec<type> = vec![val1, val2, ...]
 ```
@@ -284,9 +271,102 @@ for elt in &vector {
 }
 ```
 
+A new vector can be initialized with two ways and the used method only depends on the developer preference : 
+```rust
+let vector = vec![];
+let vector = Vec::new();
+```
 
+### 9.3. HashMap [*](https://doc.rust-lang.org/book/ch08-03-hash-maps.html)
 
+To use HashMap, you must import it from Rust's standard library.
+```rust
+use std::collections::HashMap;
+
+let mut hashmap = HashMap::new(); // To initialize a HashMap
+hashmap.insert(key, value); // To insert a new pair (key, value)
+hashmap.get(key); // To access a value from a key
+hashmap.remove(key); // To remove a key and its associated value
+println!("{:?}", hashmap); // To print the entire HashMap
+
+for (key, value) in &hashmap { // To loop through a HashMap
+    // code
+}
+```
+
+If you insert a pair (key, value) and the key already exists in the HashMap, its value is updated.
+
+### 9.4. Structs [*](https://doc.rust-lang.org/book/ch05-01-defining-structs.html)
+```rust
+struct Name {
+    atr1 : type1,
+    atr2 : type2,
+    ...
+}
+```
+To access an attribute, you follow the variable with a dot (.) and the attribute name.
+
+Example : (we assume that a struct User was defined upper in the code with the correct attributes)
+```rust
+let mut user1 = User {
+    active: true,
+    username: String::from("someusername123"),
+    email: String::from("someone@example.com"),
+    sign_in_count: 1,
+};
+user1.email = String::from("anotheremail@example.com");
+```
+
+### 9.5. Enums [*](https://doc.rust-lang.org/book/ch06-01-defining-an-enum.html)
+```rust
+enum Enumeraton {
+    val1,
+    val2,
+    ...
+    valn,
+}
+```
+
+To use the enum, you have to use `::`. For example :
+```rust
+let variable = Enumeration::val1; 
+```
+
+Enums work well with match statement. As enums have a finite number of values, it is convenient to use it this way :
+```rust
+match my_enum {
+    Enumeration::val1 => // code
+    Enumeration::val2 => // code
+    ...
+    Enumeration::valn => // code
+}
+```
+
+## 10. Summary
+
+### Data structures
+| Data structure     | Initialization                        | Common methods                                                                                    |
+|---------------|---------------------------------------------|-----------------------------------------------------------------------------------------------------------------------|
+| **Vec\<T>**    | `let mut v = vec!new();`                | `.push(x)`, `.pop()`, `.len()`, `.iter()`, `.map()`, `v[i]`, `.get(i)`, `.contains()`, `.sort()`, `.clone()`, `.is_empty()`, `.resize(n, val)`, `.extend()`, `.retain()`, `.split_at()`, `.drain()`                                 |
+| **[T; N]** (Array)   | `let a = [];`                        | `.len()`, `.iter()`, `a[i]`, `.map()`, `.copy_from_slice()`           |
+| **HashMap\<K,V>**| `use str::collections::HashMap;` <br> `let mut m = HashMap::new();`             | `.insert(k, v)`, `.get(&k)`, `.remove(&k)`, `.contains_key(&k)`, `.keys()`, `.values()`, `.entry(k).or_insert(v)`, `.iter()`, `.len()`, `.clear()`, `.retain()`, `.clone()`                                                              |
+| **Struct**    | `struct Point { x: f64, y: f64 }`           | `let p = Point { x: 1.0, y: 2.0 };` <br> Access : `p.x`, `p.y`                                              |
+| **Tuple Struct** | `struct Color(u8, u8, u8);`              | Access with index : `c.0`, `c.1`, `c.2`                                                                                 |
+| **Unit Struct** | `struct Empty;`                           | No fields — used to mark types or states                                                                   |
+| **Enum**      | `enum Direction { Up, Down, Left, Right }` | Usage : `let d = Direction::Up;` <br> Match : `match d { Direction::Up => ... }`                            |
+|               | Enum variants with or without data                        | Example : `enum Option<T> { Some(T), None }`                                               |
+
+###  Usefull type conversions
+
+| Conversion                         | Example                                                    |
+|------------------------------------|-------------------------------------------------------------|
+| Slice to Vec                       | `let v = s.to_vec();`                                       |
+| Vec to slice                       | `let s: &[T] = &v[..];`                                     |
+| Array to Vec                       | `let v = a.to_vec();`                                       |
+| `Vec<f64>` to ndarray              | `Array1::from(vec)` (with `ndarray` crate)                  |
+| Iterate over HashMap               | `for (k, v) in map.iter() { ... }`                          |
+| Get mutable reference from struct  | `let p = &mut my_struct.field;`                             |
 
 ## Source
-- [The "Book" (Rust official page)](https://doc.rust-lang.org/book/)
+- [The Book (Rust official page)](https://doc.rust-lang.org/book/)
 - [Rust tutorial (W3Schools)](https://www.w3schools.com/rust/rust_intro.php)"
