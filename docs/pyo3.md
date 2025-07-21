@@ -13,7 +13,11 @@ PyO3 is a Rust library that enables you to write native Python modules in Rust o
 ## Summary
 
 1. [Prerequisites and installation](#1-prerequisites-and-installation)
-
+2. [Python modules](#2-python-modules)
+3. [Python functions](#3-python-functions)
+4. [Python classes](#4-python-classes)
+5. [Python object types](#5-python-object-types)
+6. [Quick reference cheat sheet](#6-quick-reference-cheat-sheet)
 
 ## 1. Prerequisites and installation [*](https://pyo3.rs/main/getting-started.html)
 
@@ -198,14 +202,129 @@ from my_extension import Counter
 c = Counter()
 ```
 
-## 5. Python object types
+## 5. Python object types [*](https://pyo3.rs/v0.25.1/types.html)
 
 ### GIL & Python Context (Python<'py>)
+
 **What it is** : A token representing that the Python GIL (Global Interpreter Lock) is held — necessary for safe Python API calls.
 
 **Where it appears**: In #[pymodule], #[pyfunction], and methods interacting with Python.
 
-## Quick Reference Cheat Sheet
+```rust
+#[pyfunction]
+fn func(_py: Python<'_>, arg1: type1, ...) -> PyResult<(...)> {
+    // code
+}
+```
+
+### Smartt pointer wrappers
+
+PyO3 uses **smart pointers** to safely represent and manage Python objects in Rust. These are essential because Python uses reference counting and dynamic typing, which Rust doesn't natively support.
+
+- #### `Bound<'py, T>`
+
+This is a **reference** to a Python object, tied to the GIL lifetime `'py`. It is used when you are working with a Python object while the GIL is held and is the best for performance and safety when you don't need to store the object long-term.
+
+Should be used inside a #[pyfunction], #[pymodule], or GIL-locked block (Python::with_gil), when passing or modifying a Python object.
+
+Example : 
+```rust
+fn print_string_length(py: Python<'_>, obj: &Bound<'_, PyString>) {
+    println!("Length: {}", obj.len().unwrap());
+}
+```
+
+- #### `Py<T>` (algo `PyObject`or `Py<Pyany>`)
+
+This is an owning smart pointer to a Python object. It can outlive the GIL and be stored in Rust structs, passed around, or kept for later. You must borrow it with the GIL to use it (via `.as_ref(py)`).
+
+Should be ussed if you want to save or return a Python object outshide the function where the GIL is available.
+
+Example :
+```rust
+#[pyclass]
+struct MyWrapper {
+    obj: Py<PyAny>, // Can hold any Python object
+}
+
+#[pymethods]
+impl MyWrapper {
+    #[new]
+    fn new(obj: Py<PyAny>) -> Self {
+        Self { obj }
+    }
+
+    fn print_type(&self) {
+        Python::with_gil(|py| {
+            let obj_ref = self.obj.as_ref(py);
+            println!("Type: {}", obj_ref.get_type().name().unwrap());
+        });
+    }
+}
+```
+
+### Python Types: `T` in `Py<T>`, `Bound<'py, T>`
+
+The `T` inside smart pointers like `Py<T>` or `Bound<'py, T>` represents what Python object you are referring to. Here are the most common and useful types :
+
+| Python Type        | PyO3 Rust Equivalent          | Description                                     |
+| ------------------ | ----------------------------- | ----------------------------------------------- |
+| `str`              | `PyString`                    | For working with Python strings                 |
+| `list`             | `PyList`                      | For sequences of Python objects                 |
+| `dict`             | `PyDict`                      | For Python dictionaries                         |
+| `tuple`            | `PyTuple`                     | Immutable sequences                             |
+| `float`            | `PyFloat`                     | Python float                                    |
+| `bool`             | `PyBool`                      | Python boolean                                  |
+| any                | `PyAny`                       | Used when you don’t know or care about the type |
+| user-defined class | `MyClass` (your `#[pyclass]`) | Access custom classes from Rust                 |
+
+**Note** : the function `extract::<T>()` attempts to convert a Python object to a Rust type.
+
+Example : 
+
+```rust
+#[pyfunction]
+fn first_element(py: Python<'_>, list: &Bound<'_, PyList>) -> PyResult<isize> {
+    let val = list.get_item(0).extract::<isize>()?;
+    Ok(val)
+}
+```
+
+### Type Conversions Between Rust & Python
+
+PyO3 provides automatic conversion between Rust types and Python types. These conversions use the traits `FromPyObject`, `IntoPy`, and `ToPyObject`.
+
+| Python Type    | Rust Arg Type                 | Rust Return Type         | Notes                            |
+| -------------- | ----------------------------- | ------------------------ | -------------------------------- |
+| `int`, `float` | `i32`, `i64`, `f64`, etc.     | same                     | Simple numbers                   |
+| `str`          | `&str`, `String`, `&PyString` | `String`, `Py<PyString>` | Strings can be borrowed or owned |
+| `list[T]`      | `Vec<T>`, `&PyList`           | `Vec<T>`, `Py<PyList>`   | Ideal for sequence data          |
+| `dict[K, V]`   | `HashMap<K, V>`, `&PyDict`    | `HashMap<K, V>`          | Key-value pairs                  |
+| `tuple`        | `(T1, T2, ...)`               | tuple types in Rust      | Length must match                |
+| `Optional[T]`  | `Option<T>`                   | `Option<T>`              | For optional arguments           |
+| `Any object`   | `&PyAny`, `Py<PyAny>`         | Used with `extract()`    | Generic object access            |
+
+
+### Example and summary
+
+Here is a program that accepts a Python list, processes it in Rust and then returns a Python list : 
+```rust
+#[pyfunction]
+fn double_list(py: Python<'_>, input: &PyList) -> PyResult<Py<PyList>> {
+    let list: Vec<i32> = input.extract()?;
+    let doubled: Vec<i32> = list.iter().map(|x| x * 2).collect();
+    Ok(PyList::new(py, &doubled).into())
+}
+```
+
+- Use Python<'py> to ensure you're holding the GIL.
+- Use Bound<'py, T> for GIL-bound, efficient Python object access.
+- Use Py<T> for persistent object references outside the GIL.
+- Choose concrete types (PyList, PyDict, etc.) when working with Python built-ins.
+- Convert between Python and Rust types via FromPyObject, IntoPy<PyObject>, or direct references.
+
+
+## 6. Quick Reference Cheat Sheet
 
 | Feature / Macro                  | Description                                                                  | Example / Notes                                                                                  |
 |----------------------------------|------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------|
