@@ -1,10 +1,10 @@
 [package]
-name = "rust_pyo3"
+name = "ml_demos_rs"
 version = "0.1.0"
 edition = "2024"
 
 [lib]
-name = "rust_pyo3"
+name = "ml_demos_rs"
 crate-type = ["cdylib"] # "cdylib" is necessary to produce a shared library for Python to import from.
 
 [dependencies]
@@ -19,4 +19,4 @@ rand = "0.9"
 rand_xoshiro = "0.7.0"
 
 [package.metadata.maturin]
-name = "rust_pyo3"
+name = "ml_demos_rs"
