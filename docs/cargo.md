@@ -1,6 +1,6 @@
 # Cargo
 
-This page summarize the basics and essential commands for Cargo. You can check [The Cargo Book](https://doc.rust-lang.org/cargo/index.html) if more information is necessary.
+This page summarize the basics and essential commands of Cargo. You can check [The Cargo Book](https://doc.rust-lang.org/cargo/index.html) if more information is necessary.
 
 Cargo is the Rust package manager. Cargo downloads your Rust package’s dependencies, compiles your packages, makes distributable packages, and uploads them to crates.io, the Rust community’s package registry.
 
