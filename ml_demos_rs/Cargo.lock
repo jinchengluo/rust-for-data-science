@@ -230,6 +230,21 @@ dependencies = [
 ]
 
 [[package]]
+name = "ml_demos_rs"
+version = "0.1.0"
+dependencies = [
+ "itertools 0.14.0",
+ "linfa",
+ "linfa-clustering",
+ "linfa-nn",
+ "ndarray",
+ "numpy",
+ "pyo3",
+ "rand 0.9.1",
+ "rand_xoshiro 0.7.0",
+]
+
+[[package]]
 name = "ndarray"
 version = "0.15.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -547,21 +562,6 @@ checksum = "1465873a3dfdaa8ae7cb14b4383657caab0b3e8a0aa9ae8e04b044854c8dfce2"
 dependencies = [
  "crossbeam-deque",
  "crossbeam-utils",
-]
-
-[[package]]
-name = "ml_demos_rs"
-version = "0.1.0"
-dependencies = [
- "itertools 0.14.0",
- "linfa",
- "linfa-clustering",
- "linfa-nn",
- "ndarray",
- "numpy",
- "pyo3",
- "rand 0.9.1",
- "rand_xoshiro 0.7.0",
 ]
 
 [[package]]
