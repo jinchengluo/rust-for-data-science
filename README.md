@@ -35,7 +35,7 @@ uv tool install maturin
 
 ### Compile
 ```bash
-maturin develop 
+maturin develop --develop
 ```
 Then run your Python code.
 
