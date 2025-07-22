@@ -1,3 +1,5 @@
 ml_demos_rs/target
 ml_demos_rs/py_project/__pycache__
+poly_match_rs/target
+poly_match_rs/py_project/__pycache__
 .venv
