@@ -198,7 +198,7 @@ You can check and analyse the code and identify the changes that is efficient fo
 - Python is a superb API for researchers, and crafting fast building blocks with Rust is an extremely powerful combination.
 - Profiling is super interesting, and it pushes you to truly understand everything that’s happening in your code.
 
-And finally : computers are crazy fast. The next time you wait for something to complete, consider firing up a profiler, you might learn something new 🚀
+And finally : computers are crazy fast. The next time you wait for something to complete, consider firing up a profiler, you might learn something new.
 
 # ML demos
 
