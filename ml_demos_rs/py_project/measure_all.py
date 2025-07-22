@@ -6,7 +6,7 @@ import time
 from pathlib import Path
 
 if len(sys.argv) < 2:
-    print("Usage: python3 measure.py <module_name>")
+    print("Usage: python3 measure_all.py <module_name>")
     sys.exit(1)
 
 module_name = sys.argv[1]
@@ -30,6 +30,7 @@ def benchmark(algo_name):
 
 def main():
     benches = [f for f in os.listdir(".") if isfile(join(".", f)) and f.startswith(module_name)]
+    benches.sort
     for alg in benches:
         if alg.__contains__(".ipynb"):
             benches.remove(alg)
