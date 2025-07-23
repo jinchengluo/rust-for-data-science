@@ -12,7 +12,7 @@ This guide is divided in four parts :
 
 ### Clone project
 ```bash
-git clone git@github.com:vincentjc-lo/rust_for_data_science.git
+git clone git@github.com:jinchengluo/rust_for_data_science.git
 ```
 
 ### Install Rust and Cargo
