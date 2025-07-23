@@ -11,25 +11,8 @@ struct Polygon {
 
 #[pymethods]
 impl Polygon {
-    #[new]
-    fn new(x: PyReadonlyArray1<f64>, y: PyReadonlyArray1<f64>) -> Polygon {
-        // TODO
-    }
-
-    #[getter]
-    fn x<'py>(&self, py: Python<'py>) -> PyResult<Bound<'py, PyArray1<f64>>> {
-        Ok(self.x.to_pyarray_bound(py))
-    }
-
-    #[getter]
-    fn y<'py>(&self, py: Python<'py>) -> PyResult<Bound<'py, PyArray1<f64>>> {
-        Ok(self.y.to_pyarray_bound(py))
-    }
-
-    #[getter]
-    fn center<'py>(&self, py: Python<'py>) -> PyResult<Bound<'py, PyArray1<f64>>> {
-        Ok(self.center.to_pyarray_bound(py))
-    }
+    // TODO (constructor)
+    // TODO (getter for x, y and center)
 }
 
 #[pyfunction]
@@ -38,10 +21,17 @@ fn find_close_polygons<'py>(
     point: PyReadonlyArray1<'py, f64>,
     max_dist: f64,
 ) -> PyResult<Vec<Bound<'py, Polygon>>> {
-    // TODO
+    let mut close_polygons = vec![];
+    let point = point.as_array();
+    for poly in polygons {
+        // TODO
+    }
+
+    Ok(close_polygons)
 }
 
 pub fn poly_match_rs(_py: Python, m: &Bound<PyModule>) -> PyResult<()> {
     // TODO
+    m.add_function(wrap_pyfunction!(find_close_polygons, m)?)?;
     Ok(())
 }

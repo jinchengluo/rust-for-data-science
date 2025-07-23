@@ -10,6 +10,7 @@ fn find_close_polygons<'py>(
     max_dist: f64,
 ) -> PyResult<Vec<Bound<'py, PyAny>>> {
     // TODO
+    Ok(vec![])
 }
 
 pub fn poly_match_rs(_py: Python, m: &Bound<PyModule>) -> PyResult<()> {

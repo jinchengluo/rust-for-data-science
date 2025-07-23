@@ -6,10 +6,6 @@ mod lib_v4;
 
 use pyo3::prelude::*;
 
-use ndarray::Array1;
-use ndarray_linalg::Scalar;
-use numpy::{PyArray1, PyReadonlyArray1, ToPyArray};
-
 #[pymodule]
 pub fn poly_match_rs(py: Python, m: &Bound<PyModule>) -> PyResult<()> {
     let v0 = PyModule::new_bound(py, "v0")?;
