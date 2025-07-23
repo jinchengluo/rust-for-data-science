@@ -6,6 +6,9 @@
     - [Sampling analysis](#sampling-analysis)
     - [Exercice](#exercice)
 2. [ML demos](#ml-demos)
+    - [Context](#context-1)
+    - [Tests and mesures](#tests-and-measures-1)
+    - [Notebook](#notebook)
 
 
 # Polygon 
@@ -136,6 +139,22 @@ We want to expose `poly.{x, y, center}` as properties and numpy Arrays.
 <details>
     <summary><b>Need help?</b></summary>
          
+> ```rust
+> #[new]
+> fn new(x: PyReadonlyArray1<f64>, y: PyReadonlyArray1<f64>) -> Polygon { 
+>         // TODO
+>     }
+> ```
+
+> ```rust
+> #[getter]
+> fn x<'py>(&self, py: Python<'py>) -> PyResult<Bound<'py, PyArray1<f64>>> {
+>     // TODO
+> }
+> ```
+
+> `Ok(self.{field}.to_pyarray_bound(py))` to return a `Bound<'py, PyArray1<f64>>`.
+
 > You can translate a `Vec` to an Array with `Array1::from_vec( // vec object )`
 
 > To get the mean of an Array, use `.mean().unwrap()`.
@@ -178,9 +197,18 @@ What we want is to avoid that `to_owned`. But we need an owned object for `norm`
 **Note** : The reason we can improve on ndarray here is that we know that our array is actually just 2 `f32s`.
 
 1. Import `ndarray_linalg::Scalar` at the top of the file.
-2. Remove the definition of `center`.
-3. Write a variable `norm` that contains the distance between the center of a polygon and the target point.
+2. Adapt the code to avoid using `to_owned`, ie. try not to use the function `.norm()`.
 4. Compile and measure time.
+
+<details>
+    <summary><b>Need help?</b></summary>
+         
+> Define an object called `norm` of type float in which is defined `center` and the mathematical expression of the norm between `center` and `point` 
+
+> To catch the `center` of each `poly`, you pass by the reference by doing `&poly.borrow().center`.
+
+</details>
+-
 
 We now expect to see our 100x speedup of the initial code `poly_match_v0`.
 
@@ -208,7 +236,7 @@ Go to `ml_demos_rs` and compile the project using `maturin develop --release`
 
 Rust, when combined with Python using PyO3, provides a powerful way to accelerate performance-critical parts of machine learning and data science pipelines. Python is great for prototyping, readability, and its rich ecosystem (like numpy, pandas, scikit-learn), but it can struggle with execution speed on large datasets or complex computations. Rust, on the other hand, offers memory safety, zero-cost abstractions, and blazing-fast performance. By writing bottleneck functions in Rust and exposing them to Python via PyO3, you get the best of both worlds: Python's flexibility and Rust's speed and safety—making your machine learning workflows both efficient and scalable.
 
-## Tests and measure
+## Tests and measures
 
 Go to `ml_demos_rs/py_project/`
 
