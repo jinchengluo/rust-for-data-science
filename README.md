@@ -35,14 +35,6 @@ source .venv/bin/activate
 
 ### Install dependencies
 ```bash
-uv pip install -r requirements.txt
+uv sync
 uv tool install maturin
 ```
-
-### Compile
-```bash
-maturin develop --develop
-```
-Then run your Python code.
-
-**Disclaimer**: if you work in a notebook, you must restart your kernel to access your library update from maturin.
