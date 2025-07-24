@@ -27,6 +27,12 @@ Check with `rustc --version` and `cargo --version`
 curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
 
+### Create `.venv`
+```bash
+uv venv # at the root of the repo
+source .venv/bin/activate
+```
+
 ### Install dependencies
 ```bash
 uv pip install -r requirements.txt
