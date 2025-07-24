@@ -12,7 +12,7 @@ This guide is divided in four parts :
 
 ### Clone project
 ```bash
-git clone git@github.com:vincentjc-lo/rust_for_data_science.git
+git clone git@github.com:jinchengluo/rust_for_data_science.git
 ```
 
 ### Install Rust and Cargo
@@ -25,6 +25,12 @@ Check with `rustc --version` and `cargo --version`
 ### Install uv
 ```bash
 curl -LsSf https://astral.sh/uv/install.sh | sh
+```
+
+### Create `.venv`
+```bash
+uv venv # at the root of the repo
+source .venv/bin/activate
 ```
 
 ### Install dependencies
