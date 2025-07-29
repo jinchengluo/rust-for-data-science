@@ -1,4 +1,4 @@
-# Summary
+# Table of Contents
 
 1. [Polygon](#polygon)
     - [Context](#context)
@@ -22,7 +22,7 @@ Go to `poly_match_rs` and activate your virtual environnement from the root of t
 source .venv/bin/activate
 ```
 
-** Don't forget to install the Python dependencies after activating your venv with `uv pip install requierments.txt`
+**Don't forget to install the Python dependencies after activating your venv with `uv sync`**
 
 ## Context 
 
@@ -89,7 +89,7 @@ We are going to rewrite this function in Rust.
 
 Go to `src/lib_v1.rs` and let's start coding. We want to translate the target function.
 
-1. Rewrite `find_close_polygons` in Rust : copy the Python code of the function and translate line-to-line in Rust.
+1. Rewrite `find_close_polygons` in Rust : copy the Python code of the function (in `poly_match_v0.py`) and translate line-to-line in Rust.
 2. Add the function with `pyo3` to the module.
 3. Take a look at `poly_match_v1.py` and check the differencies with the `v0`.
 4. Compile the code using `maturin develop --release` for optimization. (**Run this command at the root of your Rust project**)

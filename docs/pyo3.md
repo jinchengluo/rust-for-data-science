@@ -10,7 +10,7 @@ PyO3 is a Rust library that enables you to write native Python modules in Rust o
 - **Great for Extensions**: Perfect for writing Python extensions in Rust instead of C/C++, thanks to safer abstractions.
 - **No GIL-holding Threads**: Rust can release Python’s Global Interpreter Lock (GIL) for multi-threaded performance gains.
 
-## Summary
+## Table of Contents
 
 1. [Prerequisites and installation](#1-prerequisites-and-installation)
 2. [Python modules](#2-python-modules)
