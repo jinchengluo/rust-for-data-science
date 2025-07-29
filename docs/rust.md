@@ -11,7 +11,7 @@ This page is a summary of the basics of Rust programming language. If you want m
 
 In each section, the title will be followed by a star (*) that makes a reference to The Book if some additional information can be necessary.
 
-## Summary
+## Table of Contents
 
 1. [Prerequisites and installation](#1-prerequisites-and-installation)
 2. [Variables and constants](#2-variables-and-constants)  
@@ -29,6 +29,8 @@ In each section, the title will be followed by a star (*) that makes a reference
 10. [Summary](#10-summary)
 
 ## 1. Prerequisites and installation [*](https://doc.rust-lang.org/book/ch01-01-installation.html)
+
+If not already done, install Rust and Cargo with the following command :
 ```bash
 $ curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh # on Linux
 $ xcode-select --install # on macOS

@@ -8,6 +8,15 @@ This guide is divided in four parts :
 3. [**How to use PyO3**](./docs/pyo3.md)
 4. [**Applications and tests**](./docs/applications.md)
 
+## You are in the `TODO` branch
+
+To check the **Applications** correction, you must go to the `main` branch with :
+```bash
+git switch main
+```
+
+In the `TODO` branch, certain files contain a TODO section that you must fill.
+
 ## Usage
 
 ### Clone project
@@ -36,5 +45,4 @@ source .venv/bin/activate
 ### Install dependencies
 ```bash
 uv sync
-uv tool install maturin
 ```
