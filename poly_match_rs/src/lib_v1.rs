@@ -9,24 +9,24 @@ fn find_close_polygons<'py>(
     point: PyReadonlyArray1<'py, f64>,
     max_dist: f64,
 ) -> PyResult<Vec<Bound<'py, PyAny>>> {
-    let mut close_polygons = vec![];
-    let point = point.as_array();
-    for poly in polygons {
-        let center = poly
-            .getattr("center")?
-            .extract::<PyReadonlyArray1<f64>>()?
-            .as_array()
-            .to_owned();
+    // let mut close_polygons = // TODO (create an empty list)
+    // let point = // TODO (convert point to Rust array)
+    // for poly in polygons {
+    //     let center = poly
+    //         .getattr("center")?
+    //         .extract::<PyReadonlyArray1<f64>>()?
+    //         .as_array()
+    //         .to_owned();
 
-        if (center - point).norm() < max_dist {
-            close_polygons.push(poly)
-        }
-    }
+    //     if (center - point).norm() < max_dist {
+    //         // TODO (push poly to clone_polygons)
+    //     }
+    // }
 
-    Ok(close_polygons)
+    Ok(vec![]) // TODO
 }
 
 pub fn poly_match_rs(_py: Python, m: &Bound<PyModule>) -> PyResult<()> {
-    m.add_function(wrap_pyfunction!(find_close_polygons, m)?)?;
+    // m.add_function(wrap_pyfunction!( // TODO , m)?)?;
     Ok(())
 }

@@ -6,40 +6,37 @@ use numpy::{PyArray1, PyReadonlyArray1, ToPyArray};
 
 #[pyclass(subclass)]
 struct Polygon {
-    x: Array1<f64>,
-    y: Array1<f64>,
-    center: Array1<f64>,
+    // x: Array1<f64>,
+    // y: // TODO
+    // center: // TODO
 }
 
 #[pymethods]
 impl Polygon {
-    #[new]
-    fn new(x: PyReadonlyArray1<f64>, y: PyReadonlyArray1<f64>) -> Polygon {
-        let x = x.as_array();
-        let y = y.as_array();
-        let center = Array1::from_vec(vec![x.mean().unwrap(), y.mean().unwrap()]);
+    // #[new]
+    // fn new(x: PyReadonlyArray1<f64>, y: PyReadonlyArray1<f64>) -> Polygon {
+    //     let x = // TODO (convert x to array)
+    //     let y = // TODO (convert y to array)
+    //     let center = Array1::from_vec(vec![ // TODO (mean of x, mean of y) ]);
 
-        Polygon {
-            x: x.to_owned(),
-            y: y.to_owned(),
-            center,
-        }
-    }
+    //     Polygon {
+    //         x: x.to_owned(),
+    //         y: y.to_owned(),
+    //         center,
+    //     }
+    // }
 
-    #[getter]
-    fn x<'py>(&self, py: Python<'py>) -> PyResult<Bound<'py, PyArray1<f64>>> {
-        Ok(self.x.to_pyarray_bound(py))
-    }
+    // #[getter]
+    // fn x<'py>(&self, py: Python<'py>) -> PyResult<Bound<'py, PyArray1<f64>>> {
+    //     Ok(self.x.to_pyarray_bound(py))
+    // }
 
-    #[getter]
-    fn y<'py>(&self, py: Python<'py>) -> PyResult<Bound<'py, PyArray1<f64>>> {
-        Ok(self.y.to_pyarray_bound(py))
-    }
+    // #[getter]
+    // fn y<'py>(&self, py: Python<'py>) -> PyResult<Bound<'py, PyArray1<f64>>> {
+    //     // TODO
+    // }
 
-    #[getter]
-    fn center<'py>(&self, py: Python<'py>) -> PyResult<Bound<'py, PyArray1<f64>>> {
-        Ok(self.center.to_pyarray_bound(py))
-    }
+    // // TODO (getter for center)
 }
 
 #[pyfunction]
@@ -51,11 +48,11 @@ fn find_close_polygons<'py>(
     let mut close_polygons = vec![];
     let point = point.as_array();
     for poly in polygons {
-        let center = poly.borrow().center.to_owned();
+        // let center = poly.borrow().center.to_owned();
 
-        if (center - point).norm() < max_dist {
-            close_polygons.push(poly)
-        }
+        // if (center - point).norm() < max_dist {
+        //     close_polygons.push(poly)
+        // }
     }
 
     Ok(close_polygons)

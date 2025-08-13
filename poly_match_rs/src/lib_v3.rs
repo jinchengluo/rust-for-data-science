@@ -51,15 +51,15 @@ fn find_close_polygons<'py>(
     let mut close_polygons = vec![];
     let point = point.as_array();
     for poly in polygons {
-        let norm = {
-            let center = &poly.borrow().center;
+        // let norm = {
+        //     let center = &poly.borrow().center;
 
-            ((center[0] - point[0]).square() + (center[1] - point[1]).square()).sqrt()
-        };
+        //     // TODO (norm calculation)
+        // };
 
-        if norm < max_dist {
-            close_polygons.push(poly)
-        }
+        // if norm < max_dist {
+        //     close_polygons.push(poly)
+        // }
     }
 
     Ok(close_polygons)

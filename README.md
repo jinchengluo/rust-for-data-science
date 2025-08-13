@@ -8,14 +8,14 @@ This guide is divided in four parts :
 3. [**How to use PyO3**](./docs/pyo3.md)
 4. [**Applications and tests**](./docs/applications.md)
 
-## You are in the `main` branch
+## You are in the `TODO_easy` branch
 
-To check the **Applications** part and do the exercices, you must go to the `TODO` branch with :
+To check the **Applications** correction, you must go to the `main` branch with :
 ```bash
-git switch TODO
+git switch main
 ```
 
-In the `TODO` branch, certain files contain a TODO section that you must fill.
+In the `TODO` branches, certain files contain a TODO section that you must fill.
 
 ## Usage
 
