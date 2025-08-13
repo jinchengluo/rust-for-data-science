@@ -10,12 +10,17 @@ This guide is divided in four parts :
 
 ## You are in the `main` branch
 
-To check the **Applications** part and do the exercices, you must go to the `TODO` branch with :
+To check the **Applications** part and do the exercices, you must go to the `TODO_<difficulty>` branch with :
 ```bash
-git switch TODO
+git switch TODO_<difficulty>
 ```
 
-In the `TODO` branch, certain files contain a TODO section that you must fill.
+In the `TODO` branches, certain files contain a TODO section that you must fill.
+
+There are 3 difficulties :
+ - `TODO_easy` : only few lines to be completed
+ - `TODO_intermediate` : small portion of code to be completed
+ - `TODO_hard` : bigger portion of code to be completed
 
 ## Usage
 
