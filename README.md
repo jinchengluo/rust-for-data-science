@@ -8,7 +8,7 @@ This guide is divided in four parts :
 3. [**How to use PyO3**](./docs/pyo3.md)
 4. [**Applications and tests**](./docs/applications.md)
 
-## You are in the `TODO` branch
+## You are in the `TODO_hard` branch
 
 To check the **Applications** correction, you must go to the `main` branch with :
 ```bash
