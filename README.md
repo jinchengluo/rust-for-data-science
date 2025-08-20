@@ -8,21 +8,17 @@ This guide is divided in four parts :
 3. [**How to use PyO3**](./docs/pyo3.md)
 4. [**Applications and tests**](./docs/applications.md)
 
-## You are in the `main` branch
+## You are in the `TODO_hard` branch
 
-To check the **Applications** part and do the exercices, you must go to the `TODO_<difficulty>` branch with :
+To check the **Applications** correction, you must go to the `main` branch with :
 ```bash
-git switch TODO_<difficulty>
+git switch main
 ```
 
-In the `TODO` branches, certain files contain a TODO section that you must fill.
+In the `TODO` branch, certain files contain a TODO section that you must fill.
 
-There are 3 difficulties :
- - `TODO_easy` : only few lines to be completed
- - `TODO_intermediate` : small portion of code to be completed
- - `TODO_hard` : bigger portion of code to be completed
+## Option 1 — Local Setup (VSCode/Cursor)
 
-## Usage
 
 ### Clone project
 ```bash
@@ -51,3 +47,23 @@ source .venv/bin/activate
 ```bash
 uv sync
 ```
+
+## Option 2 — Cloud Setup (GitHub Codespaces)
+
+For a zero-installation experience directly in your browser:
+
+1. Go to the repository on GitHub
+2. Select your desired branch (`main`, `TODO_easy`, etc.)
+3. Click the green "Code" button → "Create codespace"
+4. Once the Codespace loads, run:
+   ```bash
+   uv sync
+   source .venv/bin/activate
+   ```
+   You're now ready to start coding!
+
+> **Important**: Each Codespace is tied to the branch you selected when creating it. To switch branches, go back to GitHub, select the new branch, and click on the + icon in the top right corner to create a new Codespace for that branch then repeat step 4.
+
+<p align="center">
+  <img src="codespace_screen.png" alt="illustration"/>
+</p>
