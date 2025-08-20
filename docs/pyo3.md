@@ -238,7 +238,7 @@ fn print_string_length(py: Python<'_>, obj: &Bound<'_, PyString>) {
 
 This is an owning smart pointer to a Python object. It can outlive the GIL and be stored in Rust structs, passed around, or kept for later. You must borrow it with the GIL to use it (via `.as_ref(py)`).
 
-Should be ussed if you want to save or return a Python object outshide the function where the GIL is available.
+Should be used if you want to save or return a Python object outside the function where the GIL is available.
 
 Example :
 ```rust

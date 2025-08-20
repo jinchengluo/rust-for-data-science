@@ -145,7 +145,7 @@ println!("Variable value is here : {}", variable)
 
 ## 6. Scopes [*](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html#variable-scope)
 
-A scope refers to where a varaible is allowed to be used. A varible only lives inside the block where it as created. A block is anything inside curly braces  `{ }`.
+A scope refers to where a variable is allowed to be used. A variable only lives inside the block where it is created. A block is anything inside curly braces  `{ }`.
 
 Example :
 
@@ -321,7 +321,7 @@ user1.email = String::from("anotheremail@example.com");
 
 ### 9.5. Enums [*](https://doc.rust-lang.org/book/ch06-01-defining-an-enum.html)
 ```rust
-enum Enumeraton {
+enum Enumeration {
     val1,
     val2,
     ...
