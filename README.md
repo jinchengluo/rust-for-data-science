@@ -17,7 +17,8 @@ git switch main
 
 In the `TODO` branch, certain files contain a TODO section that you must fill.
 
-## Usage
+## Option 1 — Local Setup (VSCode/Cursor)
+
 
 ### Clone project
 ```bash
@@ -46,3 +47,23 @@ source .venv/bin/activate
 ```bash
 uv sync
 ```
+
+## Option 2 — Cloud Setup (GitHub Codespaces)
+
+For a zero-installation experience directly in your browser:
+
+1. Go to the repository on GitHub
+2. Select your desired branch (`main`, `TODO_easy`, etc.)
+3. Click the green "Code" button → "Create codespace"
+4. Once the Codespace loads, run:
+   ```bash
+   uv sync
+   source .venv/bin/activate
+   ```
+   You're now ready to start coding!
+
+> **Important**: Each Codespace is tied to the branch you selected when creating it. To switch branches, go back to GitHub, select the new branch, and click on the + icon in the top right corner to create a new Codespace for that branch then repeat step 4.
+
+<p align="center">
+  <img src="codespace_screen.png" alt="illustration"/>
+</p>
