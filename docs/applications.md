@@ -264,7 +264,7 @@ This will provide the average time execution of all and the speedup coefficient 
 
 ## Notebook
 
-There are 3 `.ipynb` files in `py_project/`. The job is approximatively the same as launching `measure.py` or `measure_all.py` invidually.
+There are 2 `.ipynb` files in `py_project/`. The job is approximatively the same as launching `measure.py` or `measure_all.py` invidually.
 
 You can check the average time execution of the different implementations of one algorithm by running all the cells.
 
