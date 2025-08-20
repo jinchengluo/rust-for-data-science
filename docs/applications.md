@@ -92,7 +92,7 @@ Go to `src/lib_v1.rs` and let's start coding. We want to translate the target fu
 1. Rewrite `find_close_polygons` in Rust : copy the Python code of the function (in `poly_match_v0.py`) and translate line-to-line in Rust.
 2. Add the function with `pyo3` to the module.
 3. Take a look at `poly_match_v1.py` and check the differencies with the `v0`.
-4. Compile the code using `maturin develop --release` for optimization. (**Run this command at the root of your Rust project**)
+4. Compile the code using `maturin develop --release` for optimization. (**Run this command at the root of your Rust project `/poly_match_rs`**)
 5. Run `measure.py` on both `v0` and `v1` and check average time execution.
 
 <details>
